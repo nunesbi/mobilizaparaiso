@@ -10,8 +10,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <link rel="stylesheet" href="style.css">
-<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
-
 </head>
 <body>
 
@@ -32,8 +30,7 @@
 
   <div class="bus-status">Ônibus em rota</div>
 
-  <div id="map"></div>
-
+  <iframe src="https://thingsboard.cloud/dashboard/18ca4420-31d5-11f1-8682-7f761467b31e?publicId=ca18bd10-31d5-11f1-bbfc-9dee6dc65253" id="map" frameborder="0" allowfullscreen></iframe>
   <div class="info-cards">
     <div class="card">
       <p>PRÓXIMO PONTO</p>
@@ -68,63 +65,14 @@
 
 </section>
 
-<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-
 <script>
-let map, marker
-
-let route = [
-  [-20.9128, -46.9902],
-  [-20.9122, -46.9895],
-  [-20.9115, -46.9888],
-  [-20.9108, -46.9880],
-  [-20.9102, -46.9873],
-  [-20.9095, -46.9867],
-  [-20.9089, -46.9860],
-  [-20.9083, -46.9854]
-]
-
-let index = 0
-
 function openApp(){
   document.getElementById('start').classList.remove('active')
   document.getElementById('app').classList.add('active')
-  setTimeout(initMap,300)
 }
 
 function toggleList(){
   document.getElementById('points').classList.toggle('show')
-}
-
-function initMap(){
-  map = L.map('map').setView(route[0], 15)
-
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{
-    maxZoom:19
-  }).addTo(map)
-
-  L.polyline(route, {color: '#22c55e', weight: 5}).addTo(map)
-
-  marker = L.marker(route[0]).addTo(map)
-
-  moveBus()
-}
-
-function moveBus(){
-  setInterval(()=>{
-    index++
-
-    if(index >= route.length){
-      index = 0
-    }
-
-    marker.setLatLng(route[index])
-    map.panTo(route[index], {animate:true, duration:1})
-
-    document.getElementById('time').innerText =
-      new Date().toLocaleTimeString()
-
-  },1500)
 }
 </script>
 

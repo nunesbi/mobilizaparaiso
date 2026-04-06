@@ -171,8 +171,10 @@ body {
 }
 
 #map {
+  display: block;
+  width: calc(100% - 30px);
   margin: 15px;
-  height: 270px;
+  height: 350px;
   border-radius: 15px;
 }
 
